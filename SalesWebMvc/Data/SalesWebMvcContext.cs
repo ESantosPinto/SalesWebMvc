@@ -14,9 +14,21 @@ namespace SalesWebMvc.Data
         {
         }
 
+        
+       
+
         public DbSet<Department> Department { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Department>()
+                .Property(d => d.Id)
+                .ValueGeneratedNever(); // Isso impede a geração automática do valor da chave primária
+
+            base.OnModelCreating(modelBuilder);
+        }
         public DbSet<Seller> Seller { get; set; }
         public DbSet<SalesRecord> SalesRecord { get; set; }
+       
 
     }
 }
